@@ -395,10 +395,11 @@ REMOVE = [
 # clean the text. This will remove everything in the above list from the text
 
 
-def clean(content, remove=REMOVE, simplified=False):
+def clean(content, remove=REMOVE, remove_whitespace=True, simplified=False):
     # These two lines are useful for Chinese texts where there was no whitespace or punctuation
     # in the original documents
-    content = re.sub("\s+", "", content)
+    if remove_whitespace:
+        content = re.sub("\s+", "", content)
     content = content.translate(str.maketrans("", "", "".join(remove)))
 
     return content
